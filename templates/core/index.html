@@ -1,0 +1,82 @@
+<html>
+	<head>
+		<link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+		<title>Ultra Simple Blog</title>
+	</head>
+	<body>
+
+		<div class="authentication">
+			{% if username %}
+				Hi <strong>{{ username }}</strong>,
+			{% endif %}
+			<a href="{{ url }}">{{ url_linktext }}</a>
+		</div>
+		
+		{% if username %}
+			<div class="new-entry-actioner">
+				<button class="showFormButton btn">New Entry</button>
+			</div>
+		{% endif %}
+		
+		<div class="content">
+			<header>
+				<h1>Ultra Simple Blog</h1>
+			</header>
+
+			{% if username %}
+				<div class="new-entry-container">
+					<form class="new-entry" action="/new_entry" name="newEntryForm" method="post">
+						<input type="text" name="title" placeholder="Title"/>
+						<textarea name="content"></textarea>
+					</form>
+					<button class="postButton btn" onclick="document.newEntryForm.submit()">
+						Post
+					</button>
+					<a class="showFormButton underline-link">Cancel</a>
+				</div>
+			{% endif %}
+
+			{% for entry in entries %}
+				<div id="post_{{ entry.key.id }}" class="post">
+					<div class="entry-title">
+						{{ entry.title|escape }}
+					</div>
+					<div class="entry-author">
+						On {{ entry.date }}, by
+						<b>{{ entry.author.nickname }}</b>
+					</div>
+					<div class="entry-content">
+						{% autoescape off %}
+							{{ entry.content|linebreaks }}
+						{% endautoescape %}
+					</div>
+					{% if username %}
+						<div class="edit-delete">
+							<a class="icon-anchor" onclick="SIMPLE_BLOG.deleteEntry({{ entry.key.id }})">
+								<i class="icon-trash"></i>
+							</a>
+							<a class="icon-anchor" onclick="SIMPLE_BLOG.enableEditing({{ entry.key.id }})">
+								<i class="icon-pencil"></i>
+							</a>
+						</div>
+					{% endif %}
+				</div>
+				{% if username %}
+					<form id="form_{{ entry.key.id }}" class="edit-entry" action="/edit_entry/{{ entry.key.id }}" method="post">
+						<input type="text" name="title" placeholder="Title" value="{{ entry.title }}"/>
+						<textarea name="content">{{ entry.content }}</textarea>
+						<input class="btn" type="submit" value="Save">
+						<a class="underline-link" onclick="SIMPLE_BLOG.enableEditing({{ entry.key.id }})">
+							Cancel
+						</a>
+					</form>
+				{% endif %}
+			{% endfor %}
+
+		</div>
+		{% if username %}
+			<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+			<script type="text/javascript" src="/js/main.js"></script>
+		{% endif %}
+	</body>
+</html>
