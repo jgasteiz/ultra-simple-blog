@@ -14,13 +14,17 @@
 		
 		{% if username %}
 			<div class="new-entry-actioner">
-				<button class="showFormButton btn">New Entry</button>
+				<button class="showFormButton btn">
+					New Entry
+				</button>
 			</div>
 		{% endif %}
 		
 		<div class="content">
 			<header>
-				<h1>Ultra Simple Blog</h1>
+				<h1>
+					Ultra Simple Blog
+				</h1>
 			</header>
 
 			{% if username %}
@@ -71,9 +75,15 @@
 						</a>
 					</form>
 				{% endif %}
+				<div class="line"></div>
 			{% endfor %}
 
+			<footer>
+				This is a simple blogging tool developed in django and deployed at Google App Engine. If you want to take a look at the code, here's the repo: <a target="_blank" href="https://github.com/jgasteiz/ultra-simple-blog">Ultra Simple Blog - Github</a>
+			</footer>
+
 		</div>
+
 		{% if username %}
 			<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 			<script type="text/javascript" src="/js/main.js"></script>

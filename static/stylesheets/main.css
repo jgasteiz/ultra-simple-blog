@@ -6,6 +6,9 @@ body {
 	background: whiteSmoke;
 	margin: 0 auto;
 }
+footer {
+	margin: 20px 0;
+}
 input[type="text"] {
 	width: 100%;
 	padding: 5px;
@@ -76,6 +79,11 @@ a.icon-anchor {
 .icon-trash {
 	background-position: -456px 0;
 }
+div.line {
+	background: #E5E5E5;
+	height: 1px;
+	margin: 40px 0;
+}
 /*
 	End - Simple elements
 */
@@ -89,7 +97,7 @@ a.icon-anchor {
 	margin: 20px 0;
 }
 .content {
-	margin-top: 40px;
+	margin: 40px 0;
 	padding: 20px;
 	background: white;
 }
@@ -111,7 +119,7 @@ div.edit-delete {
 }
 div.post {
 	position: relative;
-	margin: 40px 0;
+	margin-top: 40px;
 }
 div.entry-title {
 	font-size: 2em;
