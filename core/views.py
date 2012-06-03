@@ -8,7 +8,7 @@ from core.models import Entry
 
 def home(request):
 	"""
-	Main function
+	Main page. Loads all the entries, ordered by date
 	"""
 	entries_query = Entry.all().order('-date')
 	entries = entries_query.fetch(10)
@@ -45,13 +45,6 @@ def new_entry(request):
 			entry.put()
 	return HttpResponseRedirect("/")
 
-def delete_entry(request, id):
-	"""
-	Deletes an entry
-	"""
-	Entry.get_by_id(int(id)).delete()
-	return HttpResponseRedirect("/")
-
 def edit_entry(request, id):
 	"""
 	Edits an entry
@@ -64,6 +57,13 @@ def edit_entry(request, id):
 			entry.author = users.get_current_user()
 		if entry.content != '' and entry.title != '':
 			entry.put()
+	return HttpResponseRedirect("/")
+
+def delete_entry(request, id):
+	"""
+	Deletes an entry
+	"""
+	Entry.get_by_id(int(id)).delete()
 	return HttpResponseRedirect("/")
 
 

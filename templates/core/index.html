@@ -41,7 +41,11 @@
 			{% endif %}
 
 			{% for entry in entries %}
-				<div id="post_{{ entry.key.id }}" class="post">
+					{% if username %}
+					<div id="post_{{ entry.key.id }}" class="post">
+					{% else %}
+					<div class="post">
+					{% endif %}			
 					<div class="entry-title">
 						{{ entry.title|escape }}
 					</div>
@@ -51,7 +55,7 @@
 					</div>
 					<div class="entry-content">
 						{% autoescape off %}
-							{{ entry.content|linebreaks }}
+							{{ entry.content|urlize|linebreaks }}
 						{% endautoescape %}
 					</div>
 					{% if username %}
