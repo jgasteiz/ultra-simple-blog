@@ -1,45 +1,62 @@
 {% extends "core/base.html" %}
 
 {% block content %}
+	
 	{% for entry in entries %}
-			{% if username %}
-			<div id="post_{{ entry.key.id }}" class="post">
-			{% else %}
-			<div class="post">
-			{% endif %}			
+			
+		{% if username %}
+		<div id="post_{{ entry.key.id }}" class="post">
+		{% else %}
+		<div class="post">
+		{% endif %}		
+			
+			<!-- Title -->	
 			<div class="entry-title">
 				{{ entry.title|escape }}
-			</div>
+			</div><!-- End Title -->
+			
+			<!-- Author -->
 			<div class="entry-author">
 				On {{ entry.date }}, by
 				<b>{{ entry.author.nickname }}</b>
-			</div>
+			</div><!-- End Author -->
+			
+			<!-- Body -->
 			<div class="entry-content">
 				{% autoescape off %}
 					{{ entry.content|urlize|linebreaks }}
 				{% endautoescape %}
-			</div>
+			</div><!-- End Body -->
+			
 			{% if username %}
-				<div class="edit-delete">
-					<a class="icon-anchor" onclick="SIMPLE_BLOG.deleteEntry({{ entry.key.id }})">
-						<i class="icon-trash"></i>
-					</a>
-					<a class="icon-anchor" onclick="SIMPLE_BLOG.enableEditing({{ entry.key.id }})">
-						<i class="icon-pencil"></i>
-					</a>
-				</div>
-			{% endif %}
-		</div>
-		{% if username %}
-			<form id="form_{{ entry.key.id }}" class="edit-entry" action="/edit_entry/{{ entry.key.id }}" method="post">
-				<input type="text" name="title" placeholder="Title" value="{{ entry.title }}"/>
-				<textarea name="content">{{ entry.content }}</textarea>
-				<input class="btn" type="submit" value="Save">
-				<a class="underline-link" onclick="SIMPLE_BLOG.enableEditing({{ entry.key.id }})">
-					Cancel
+			<!-- Edit-Delete controls -->
+			<div class="edit-delete">
+				<a class="icon-anchor" onclick="USIMPLE_BLOG.Core.deleteEntry({{ entry.key.id }})">
+					<i class="icon-trash"></i>
 				</a>
-			</form>
+				<a class="icon-anchor" onclick="USIMPLE_BLOG.Core.enableEditing({{ entry.key.id }})">
+					<i class="icon-pencil"></i>
+				</a>
+			</div><!-- End Edit-Delete controls -->
+			{% endif %}
+
+		</div>
+		
+		{% if username %}
+		<!-- Entry form -->
+		<form id="form_{{ entry.key.id }}" class="edit-entry" action="/edit_entry/{{ entry.key.id }}" method="post">
+			<input type="text" name="title" placeholder="Title" value="{{ entry.title }}"/>
+			<textarea name="content">{{ entry.content }}</textarea>
+			<input class="btn" type="submit" value="Save">
+			<a class="underline-link" onclick="USIMPLE_BLOG.Core.enableEditing({{ entry.key.id }})">
+				Cancel
+			</a>
+		</form><!-- End Entry form -->
 		{% endif %}
+
 		<div class="line"></div>
+
 	{% endfor %}
+
 {% endblock %}
+
