@@ -24,6 +24,9 @@ input[type="text"] {
 	font-size: 1.2em;
 	margin-bottom: 10px;
 }
+iframe {
+	width:100% !important;
+}
 textarea {
 	width: 100%;
 	resize: none;
@@ -59,6 +62,17 @@ img {
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
+}
+.error {
+	position: absolute;
+	top: 40px;
+	padding: 10px 20px;
+	color: #B94A48;
+	background-color: #F2DEDE;
+	border: 1px solid #EED3D7;
+	border-radius: 4px;
+	font-weight: bold;
+	font-size: 0.9em;
 }
 .underline-link {
 	vertical-align: sub;

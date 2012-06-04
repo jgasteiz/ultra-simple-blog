@@ -6,13 +6,19 @@
 	<body>
 
 		<div class="authentication">
-			{% if username %}
-				Hi <strong>{{ username }}</strong>,
+			{% if current_user %}
+				Hi <strong>{{ current_user }}</strong>,
 			{% endif %}
 			<a href="{{ url }}">{{ url_linktext }}</a>
 		</div>
-		
-		{% if username %}
+
+		{% for error in errors %}
+			<div class="error">
+				{{ error.message }}
+			</div>
+		{% endfor %}
+
+		{% if current_user %}
 			<div class="new-entry-actioner">
 				<button class="showFormButton btn">
 					New Entry
@@ -27,16 +33,20 @@
 				</h1>
 			</header>
 
-			{% if username %}
+			{% if current_user %}
 				<div class="new-entry-container">
-					<form class="new-entry" action="/new_entry" name="newEntryForm" method="post">
-						<input type="text" name="title" placeholder="Title"/>
-						<textarea name="content"></textarea>
+					<form class="new-entry" action="/" name="newEntryForm" method="post">
+						{% for field in form %}
+							{{ field }}
+						{% endfor %}
+						<input type="hidden" name="id" value="-1"/>
 					</form>
 					<button class="postButton btn" onclick="document.newEntryForm.submit()">
 						Post
 					</button>
-					<a class="showFormButton underline-link">Cancel</a>
+					<a class="showFormButton underline-link">
+						Cancel
+					</a>
 				</div>
 			{% endif %}
 
@@ -48,7 +58,7 @@
 
 		</div>
 
-		{% if username %}
+		{% if current_user %}
 			<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 			<script type="text/javascript" src="/js/USIMPLE_BLOG.js"></script>
 			<script type="text/javascript" src="/js/USIMPLE_BLOG.Core.js"></script>

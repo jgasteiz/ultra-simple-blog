@@ -4,7 +4,7 @@
 	
 	{% for entry in entries %}
 			
-		{% if username %}
+		{% if current_user %}
 		<div id="post_{{ entry.key.id }}" class="post">
 		{% else %}
 		<div class="post">
@@ -28,7 +28,7 @@
 				{% endautoescape %}
 			</div><!-- End Body -->
 			
-			{% if username %}
+			{% if current_user %}
 			<!-- Edit-Delete controls -->
 			<div class="edit-delete">
 				<a class="icon-anchor" onclick="USIMPLE_BLOG.Core.deleteEntry({{ entry.key.id }})">
@@ -42,11 +42,12 @@
 
 		</div>
 		
-		{% if username %}
+		{% if current_user %}
 		<!-- Entry form -->
-		<form id="form_{{ entry.key.id }}" class="edit-entry" action="/edit_entry/{{ entry.key.id }}" method="post">
-			<input type="text" name="title" placeholder="Title" value="{{ entry.title }}"/>
-			<textarea name="content">{{ entry.content }}</textarea>
+		<form id="form_{{ entry.key.id }}" class="edit-entry" action="/" method="post">
+			<input id="id_title" type="text" name="title" placeholder="Title" value="{{ entry.title }}"/>
+			<textarea id="id_content" name="content">{{ entry.content }}</textarea>
+			<input type="hidden" name="id" value="{{ entry.key.id }}"/>
 			<input class="btn" type="submit" value="Save">
 			<a class="underline-link" onclick="USIMPLE_BLOG.Core.enableEditing({{ entry.key.id }})">
 				Cancel

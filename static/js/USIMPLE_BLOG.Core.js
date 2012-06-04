@@ -15,6 +15,7 @@ USIMPLE_BLOG.Core = (function() {
 	 */
 	var initListeners = function() {
 		$(".showFormButton").click(function() {
+			$(".error").hide();
 			$(".post").toggle();
 			$(".line").toggle();
 			$(".new-entry-actioner").toggle();
@@ -44,6 +45,7 @@ USIMPLE_BLOG.Core = (function() {
 	 * @param {int} id
 	 */
 	var enableEditing = function(id) {
+		$(".error").hide();
 		$(".new-entry-actioner").toggle();
 		$("#post_" + id).toggle();
 		$("#form_" + id).toggle();
