@@ -17,6 +17,15 @@ header h1 {
 footer {
 	margin: 20px 0;
 }
+a {
+	text-decoration: none;
+	border-bottom: 1px solid black;
+	color: black;
+}
+a:hover {
+	background: #E67E7E;
+	border: 0;
+}
 input[type="text"] {
 	width: 100%;
 	padding: 5px;
