@@ -4,7 +4,7 @@
  * @author Javi Manzano | @jgasteiz
  */
 
-var USIMPLE_BLOG = USIMPLE_BLOG || {};
+var USIMPLE_BLOG = USIMPLE_BLOG || {};
 
 USIMPLE_BLOG.VERSION = '1.0';
 
