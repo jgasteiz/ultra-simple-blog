@@ -6,6 +6,14 @@ body {
 	background: whiteSmoke;
 	margin: 0 auto;
 }
+header {
+	margin-top: 20px;
+	margin-bottom: 60px;
+}
+header h1 {
+	font-size: 2.6em;
+	margin: 0;
+}
 footer {
 	margin: 20px 0;
 }
@@ -82,7 +90,7 @@ a.icon-anchor {
 div.line {
 	background: #E5E5E5;
 	height: 1px;
-	margin: 40px 0;
+	margin: 60px 0;
 }
 /*
 	End - Simple elements
@@ -119,7 +127,6 @@ div.edit-delete {
 }
 div.post {
 	position: relative;
-	margin-top: 40px;
 }
 div.entry-title {
 	font-size: 2em;
