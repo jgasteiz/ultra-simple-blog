@@ -1,9 +1,9 @@
 Ultra Simple Blog
 =================
 
-* The main app is in core/.
-* Templates are in templates/.
-* Stylesheets and Javascript files in static/stylesheets/ & static/js.
+* The main app is in simpleblog/
+* Templates are in templates/
+* Stylesheets and Javascript files in static/stylesheets & static/js
 
 Installed apps
 --------------

@@ -27,10 +27,10 @@ handlers:
   expiration: '0'
 
 - url: /js
-  static_dir: static/js
+  static_dir: simpleblog/static/js
 
 - url: /stylesheets
-  static_dir: static/stylesheets
+  static_dir: simpleblog/static/stylesheets
 
 - url: /.*
   script: djangoappengine.main.application

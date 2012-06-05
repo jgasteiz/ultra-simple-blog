@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import *
 
-from core.views import home, delete_entry
+from simpleblog.views import home, delete_entry
 
 handler500 = 'djangotoolbox.errorviews.server_error'
 

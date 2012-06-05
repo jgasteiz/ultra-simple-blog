@@ -4,8 +4,8 @@ from django.template.defaultfilters import slugify
 from django.shortcuts import render
 
 from google.appengine.api import users
-from core.models import Entry
-from core.forms import EntryForm
+from simpleblog.models import Entry
+from simpleblog.forms import EntryForm
 
 def home(request):
 	"""
@@ -51,7 +51,7 @@ def home(request):
 		'form': form,
 		'errors': errors
 		}
-	return render(request, 'core/index.html', template_values)
+	return render(request, 'simpleblog/index.html', template_values)
 
 
 def delete_entry(request, id):
