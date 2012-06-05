@@ -130,14 +130,16 @@ div.line {
 .authentication {
 	text-align: right;
 	margin: 20px 0;
+	padding-right: 12px;
+}
+.new-entry-actioner {
+	text-align: right;
+	padding-right: 12px;
 }
 .content {
 	margin: 40px 0;
 	padding: 20px;
 	background: white;
-}
-.new-entry-actioner {
-	text-align: right;
 }
 .new-entry-container {
 	display: none;
