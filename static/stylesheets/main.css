@@ -34,7 +34,7 @@ input[type="text"] {
 	margin-bottom: 10px;
 }
 iframe {
-	width:100% !important;
+	max-width: 100% !important;
 }
 textarea {
 	width: 100%;
