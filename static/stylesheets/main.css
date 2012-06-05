@@ -104,6 +104,10 @@ a.icon-anchor {
 	text-decoration: none;
 	cursor: pointer;
 }
+a.icon-anchor:hover {
+	background: #E67E7E;
+	border: 0;
+}
 .icon-pencil {
 	background-position: 0 -72px;
 }
