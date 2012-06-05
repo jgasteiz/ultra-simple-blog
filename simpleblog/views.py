@@ -80,3 +80,4 @@ def delete_entry(request, id):
 	else:
 		messages.add_message(request, messages.ERROR, "You are not the owner!")
 	return HttpResponseRedirect("/")
+

@@ -16,5 +16,6 @@ class Entry(db.Model):
 	def put(self):
 		self.author = users.get_current_user()
 		key = super(Entry, self).put()
-		self.slug = '%i-%s' % (key.id(), slugify(self.title))
+		if not self.slug:
+			self.slug = '%i-%s' % (key.id(), slugify(self.title))
 		super(Entry, self).put()
