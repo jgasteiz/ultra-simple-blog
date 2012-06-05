@@ -2,6 +2,8 @@
 	Simple elements
 */
 body {
+	font-family: "Times New Roman", Helvetica, Arial;
+	font-weight: 300;
 	max-width: 900px;
 	background: whiteSmoke;
 	margin: 0 auto;
@@ -49,6 +51,98 @@ img {
 	height: auto;
 	margin-bottom: 10px;
 }
+/*
+	End - Simple elements
+*/
+
+
+/*
+	Controls
+*/
+.edit-delete {
+	position: absolute;
+	top: -16px;
+	right: 0;
+}
+[class^="icon-"],
+[class*=" icon-"] {
+	cursor: pointer;
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	*margin-right: .3em;
+	line-height: 14px;
+	vertical-align: text-top;
+	background-image: url("glyphicons-halflings.png");
+	background-position: 14px 14px;
+	background-repeat: no-repeat;
+}
+[class^="icon-"]:hover,
+[class*=" icon-"]:hover {
+	background-color: #E67E7E;
+}
+.icon-pencil {
+	background-position: 0 -72px;
+}
+.icon-trash {
+	background-position: -456px 0;
+}
+.new-entry-actioner {
+	text-align: right;
+	padding-right: 12px;
+}
+/*
+	End - Controls
+*/
+
+
+/*
+	Containers
+*/
+.authentication {
+	text-align: right;
+	margin: 20px 0;
+	padding-right: 12px;
+}
+
+.content {
+	margin: 40px 0;
+	padding: 20px;
+	background: white;
+}
+.new-entry-container {
+	display: none;
+	margin-bottom: 40px;
+}
+.edit-entry-form {
+	display: none;
+	margin-top: 40px;
+}
+.post {
+	position: relative;
+}
+.entry-title {
+	font-size: 2em;
+	margin-bottom: 10px;
+}
+.entry-author {
+	text-align: right;
+	font-style: italic;
+}
+/*
+	End - Containers
+*/
+
+/*
+	Various
+*/
+.a-title {
+	border: 0;
+}
+.a-title:hover {
+	background: transparent;
+	color: #E67E7E;
+}
 .btn {
 	/*Taken from bootstrap*/
 	display: inline-block;
@@ -72,7 +166,7 @@ img {
 	-moz-border-radius: 4px;
 	border-radius: 4px;
 }
-.error {
+.messages {
 	position: absolute;
 	top: 40px;
 	padding: 10px 20px;
@@ -88,85 +182,12 @@ img {
 	border-bottom: 1px solid black;
 	cursor: pointer;
 }
-[class^="icon-"],
-[class*=" icon-"] {
-	display: inline-block;
-	width: 14px;
-	height: 14px;
-	*margin-right: .3em;
-	line-height: 14px;
-	vertical-align: text-top;
-	background-image: url("glyphicons-halflings.png");
-	background-position: 14px 14px;
-	background-repeat: no-repeat;
-}
-a.icon-anchor {
-	text-decoration: none;
-	cursor: pointer;
-}
-a.icon-anchor:hover {
-	background: #E67E7E;
-	border: 0;
-}
-.icon-pencil {
-	background-position: 0 -72px;
-}
-.icon-trash {
-	background-position: -456px 0;
-}
-div.line {
+.line {
 	background: #E5E5E5;
 	height: 1px;
 	margin: 60px 0;
 }
 /*
-	End - Simple elements
+	End - Various
 */
-
-
-/*
-	From top to bottom, containers
-*/
-.authentication {
-	text-align: right;
-	margin: 20px 0;
-	padding-right: 12px;
-}
-.new-entry-actioner {
-	text-align: right;
-	padding-right: 12px;
-}
-.content {
-	margin: 40px 0;
-	padding: 20px;
-	background: white;
-}
-.new-entry-container {
-	display: none;
-	margin-bottom: 40px;
-}
-form.edit-entry {
-	display: none;
-	margin-top: 40px;
-}
-div.edit-delete {
-	position: absolute;
-	top: -16px;
-	right: 0;
-}
-div.post {
-	position: relative;
-}
-div.entry-title {
-	font-size: 2em;
-	margin-bottom: 10px;
-}
-div.entry-author {
-	text-align: right;
-	font-style: italic;
-}
-/*
-	End - From top to bottom, containers
-*/
-
 

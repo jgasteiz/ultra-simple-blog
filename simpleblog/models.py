@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from google.appengine.api import users
 from google.appengine.ext import db
 from django.template.defaultfilters import slugify
 
@@ -11,3 +12,9 @@ class Entry(db.Model):
 
 	def own(self, user):
 		return self.author == user
+
+	def put(self):
+		self.author = users.get_current_user()
+		key = super(Entry, self).put()
+		self.slug = '%i-%s' % (key.id(), slugify(self.title))
+		super(Entry, self).put()

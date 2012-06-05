@@ -14,60 +14,73 @@ USIMPLE_BLOG.Core = (function() {
 	 * @method initListeners
 	 */
 	var initListeners = function() {
-		$(".showFormButton").click(function() {
-			$(".error").hide();
+		toggleCreating();
+		toggleEditing();
+		toggleDeleting();
+	}
+
+	/**
+	 * Starts listening at click in .toggleCreating elements
+	 *
+	 * When clicked this elements:
+	 *	- messages must disappear.
+	 *	- posts must toggle.
+	 *	- lines separating posts must toggle.
+	 *	- New Entry button and New Entry Form must toggle.
+	 *
+	 * @method toggleCreating
+	 */
+	var toggleCreating = function() {
+		$(".toggleCreating").click(function() {
+			$(".messages").hide();
 			$(".post").toggle();
 			$(".line").toggle();
 			$(".new-entry-actioner").toggle();
 			$(".new-entry-container").toggle();
 		});
-		$(".cancelEditing").click(function() {
-			$(".new-entry-container").animate({
-				width: 'toggle',
-				height: 'toggle'
-			}, {
-				duration: 100,
-				complete: function() {
-					$(".new-entry-actioner").show();
-				}
-			});
-		});
-		$(".icon-anchor").click(function(e) {
-			e.preventDefault();
-		})
-	}
-
-	/**
-	 * Enable edit-mode for an entry
-	 *
-	 * @method enableEditing
-	 *
-	 * @param {int} id
-	 */
-	var enableEditing = function(id) {
-		$(".error").hide();
-		$(".new-entry-actioner").toggle();
-		$("#post_" + id).toggle();
-		$("#form_" + id).toggle();
 	};
 
 	/**
-	 * Deletes an entry
+	 * Starts listening at click in .toggleEditing elements
 	 *
-	 * @method deleteEntry
+	 * When clicked this elements:
+	 *	- messages must disappear.
+	 *	- main post must toggle.
+	 *	- main post editing form must toggle.
+	 *	- If is not of his property, he won't be able to edit it.
 	 *
-	 * @param {int} id
+	 * @method toggleEditing
 	 */
-	var deleteEntry = function(id) {
-		if(confirm("You're about to delete this entry, do you want to continue?")) {
-			location.href = "delete_entry/" + id;
-		}
+	var toggleEditing = function() {
+		$(".toggleEditing").click(function() {
+			var id = $(this).attr("id");
+			$(".messages").hide();
+			$(".new-entry-actioner").toggle();
+			$(".post-" + id).toggle();
+			$(".form-" + id).toggle();
+		});
+	};
+
+	/**
+	 * Starts listening at click in .toggleDeleting elements
+	 *
+	 * When clicked this elements:
+	 *	- asks if user want to delete an entry.
+	 *	- If is not of his property, he won't be able to delete it.
+	 *
+	 * @method toggleDeleting
+	 */
+	var toggleDeleting = function() {
+		$(".toggleDeleting").click(function() {
+			var id = $(this).attr("id");
+			if(confirm("You're about to delete this entry, do you want to continue?")) {
+				location.href = "delete_entry/" + id;
+			}
+		});
 	};
 
 	return {
-		initListeners: initListeners,
-		enableEditing: enableEditing,
-		deleteEntry: deleteEntry
+		initListeners: initListeners
 	};
 
 })(USIMPLE_BLOG);
