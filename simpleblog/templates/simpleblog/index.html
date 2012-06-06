@@ -39,6 +39,7 @@
 		{% if current_user %}
 		<!-- Entry form -->
 		<form class="edit-entry-form form-{{ entry.key.id }}" action="edit_entry/" method="post">
+			{% csrf_token %}
 			<input id="id_title" type="text" name="title" placeholder="Title" value="{{ entry.title }}"/>
 			<textarea id="id_content" name="content">{{ entry.content }}</textarea>
 			<input type="hidden" name="id" value="{{ entry.key.id }}"/>

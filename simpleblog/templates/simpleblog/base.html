@@ -40,6 +40,7 @@
 			{% if current_user %}
 				<div class="new-entry-container">
 					<form class="new-entry-form" action="new_entry/" name="newEntryForm" method="post">
+						{% csrf_token %}
 						{% for field in form %}
 							{{ field }}
 						{% endfor %}
