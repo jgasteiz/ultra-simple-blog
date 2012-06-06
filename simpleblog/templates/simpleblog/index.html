@@ -23,9 +23,7 @@
 			
 			<!-- Body -->
 			<div class="entry-content">
-				{% autoescape off %}
-					{{ entry.content|urlize|linebreaks }}
-				{% endautoescape %}
+				{{ entry.content|urlize|linebreaks }}
 			</div><!-- End Body -->
 			
 			{% if current_user %}
