@@ -1,6 +1,8 @@
 {% extends "simpleblog/base.html" %}
 
 {% block content %}
+
+	{% load simpleblog %}
 	
 	{% for entry in entries %}
 			
@@ -8,7 +10,7 @@
 		<div class="post post-{{ entry.key.id }}">
 		{% else %}
 		<div class="post">
-		{% endif %}		
+		{% endif %}
 			
 			<!-- Title -->	
 			<div class="entry-title">
@@ -23,7 +25,7 @@
 			
 			<!-- Body -->
 			<div class="entry-content">
-				{{ entry.content|urlize|linebreaks }}
+				{{ entry.content|allowtags|safe|urlize|linebreaks }}
 			</div><!-- End Body -->
 			
 			{% if current_user %}
