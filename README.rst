@@ -11,3 +11,5 @@ Installed apps
 * django-autoload: http://bitbucket.org/twanschik/django-autoload/get/tip.zip
 * django-dbindexer: http://bitbucket.org/wkornewald/django-dbindexer/get/tip.zip
 * django-testapp: http://bitbucket.org/wkornewald/django-testapp/get/tip.zip
+* html5lib: http://code.google.com/p/html5lib/
+* bleach: https://github.com/jsocol/bleach
