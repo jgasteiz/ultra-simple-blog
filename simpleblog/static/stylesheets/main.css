@@ -5,16 +5,27 @@ body {
 	font-family: "Times New Roman", Helvetica, Arial;
 	font-weight: 300;
 	max-width: 900px;
-	background: whiteSmoke;
+	background: #252525;
 	margin: 0 auto;
 }
 header {
-	margin-top: 20px;
-	margin-bottom: 60px;
+	padding: 40px 20px 20px;
+	height: 96px;
+	background: #003F00;
+	position: relative;
 }
 header h1 {
-	font-size: 2.6em;
 	margin: 0;
+	margin-bottom: 10px;
+}
+header h1 a {
+	font-size: 1.3em;
+	border: 0;
+	color: whiteSmoke;
+}
+header h1 a:hover {
+	background: transparent;
+	color: #FFC757;
 }
 footer {
 	margin: 20px 0;
@@ -25,7 +36,8 @@ a {
 	color: black;
 }
 a:hover {
-	color: #B84646;
+	color: #004400;
+	background: #E0FFB8;
 	border: 0;
 }
 input[type="text"] {
@@ -85,17 +97,13 @@ li {
 }
 [class^="icon-"]:hover,
 [class*=" icon-"]:hover {
-	background-color: #E67E7E;
+	background-color: #FFC757;
 }
 .icon-pencil {
 	background-position: 0 -72px;
 }
 .icon-trash {
 	background-position: -456px 0;
-}
-.new-entry-actioner {
-	text-align: right;
-	padding-right: 12px;
 }
 /*
 	End - Controls
@@ -106,14 +114,43 @@ li {
 	Containers
 */
 .authentication {
-	text-align: right;
-	margin: 20px 0;
-	padding-right: 12px;
+	position: absolute;
+	color: whiteSmoke;
+	right: 20px;
+	top: 16px;
 }
-
+.authentication a {
+	color: whiteSmoke;
+	border-color: whiteSmoke;
+}
+.authentication a:hover {
+	color: #FFC757;
+	border: 0;
+	background: transparent;
+}
+.new-entry-actioner {
+	float: right;
+}
+.messages {
+	position: absolute;
+	left: 20px;
+	top: 90px;
+	padding: 10px 20px 5px;
+	color: #B94A48;
+	background-color: #F2DEDE;
+	border: 1px solid #EED3D7;
+	border-radius: 4px;
+	font-weight: bold;
+	font-size: 0.9em;
+	margin: 0;
+}
+.messages span {
+	display: block;
+	margin-bottom: 5px;
+}
 .content {
-	margin: 40px 0;
-	padding: 20px;
+	padding: 40px 20px 20px;
+	margin-bottom: 40px;
 	background: white;
 }
 .new-entry-container {
@@ -142,13 +179,6 @@ li {
 /*
 	Various
 */
-.a-title {
-	border: 0;
-}
-.a-title:hover {
-	background: transparent;
-	color: #B84646;
-}
 .btn {
 	display: inline-block;
 	cursor: pointer;
@@ -159,21 +189,10 @@ li {
 	text-align: center;
 	vertical-align: middle;
 	border: 0;
-	background: #B84646;
+	background: #469846;
 	border: 0;
 	box-shadow: 0px 1px 4px #888;
 	color: whiteSmoke;
-}
-.messages {
-	position: absolute;
-	top: 40px;
-	padding: 10px 20px;
-	color: #B94A48;
-	background-color: #F2DEDE;
-	border: 1px solid #EED3D7;
-	border-radius: 4px;
-	font-weight: bold;
-	font-size: 0.9em;
 }
 .underline-link {
 	vertical-align: sub;
@@ -186,7 +205,7 @@ li {
 	margin: 60px 0;
 }
 .moderated {
-	background: #FFF0F0;
+	background: #FFDDDD;
 }
 .italic {
 	font-style: italic;

@@ -9,37 +9,39 @@
 	</head>
 	<body>
 
-		<div class="authentication">
-			{% if current_user %}
-				Hi <strong>{{ current_user }}</strong>,
-			{% endif %}
-			<a href="{{ url }}">{{ url_linktext }}</a>
-		</div>
-
-		{% if messages %}
-			<ul class="messages">
-				{% for message in messages %}
-					<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-				{% endfor %}
-			</ul>
-		{% endif %}
-
-		{% if current_user %}
-			<div class="new-entry-actioner">
-				<button class="toggleCreating btn" data="new">
-					New Entry
-				</button>
+		<header>
+			<div class="authentication">
+				{% if current_user %}
+					Hi {{ current_user }},
+				{% endif %}
+				<a href="{{ url }}">{{ url_linktext }}</a>
 			</div>
-		{% endif %}
+
+			<h1>
+				<a class="a-title" href="/">
+					Ultra Simple Blog
+				</a>
+			</h1>
+
+			{% if current_user %}
+				<div class="new-entry-actioner">
+					<button class="toggleCreating btn" data="new">
+						New Entry
+					</button>
+				</div>
+			{% endif %}
+
+			{% if messages %}
+				<div class="messages">
+					{% for message in messages %}
+						<span{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</span>
+					{% endfor %}
+				</div>
+			{% endif %}
+			
+		</header>
 		
 		<div class="content">
-			<header>
-				<h1>
-					<a class="a-title" href="/">
-						Ultra Simple Blog
-					</a>
-				</h1>
-			</header>
 
 			{% if current_user %}
 				<div class="new-entry-container">
