@@ -51,6 +51,12 @@ img {
 	height: auto;
 	margin-bottom: 10px;
 }
+ul {
+	padding-left: 18px;
+}
+li {
+	margin-bottom: 5px;
+}
 /*
 	End - Simple elements
 */
