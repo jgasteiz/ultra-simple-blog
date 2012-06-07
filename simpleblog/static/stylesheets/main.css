@@ -95,7 +95,7 @@ li {
 }
 [class^="icon-"]:hover,
 [class*=" icon-"]:hover {
-	background-color: #FFC757;
+	background-color: #E0FFB8;
 }
 .icon-pencil {
 	background-position: 0 -72px;
