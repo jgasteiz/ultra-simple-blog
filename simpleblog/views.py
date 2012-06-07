@@ -4,6 +4,8 @@ from django.template.defaultfilters import slugify
 from django.shortcuts import render
 from django.contrib import messages
 
+from django.views.generic import DetailView, ListView
+
 from google.appengine.api import users
 from simpleblog.models import Entry
 from simpleblog.forms import EntryForm
@@ -31,6 +33,13 @@ def home(request):
 		'form': EntryForm(),
 		}
 	return render(request, 'simpleblog/index.html', template_values)
+
+
+class EntriesDetailView(ListView):
+	context_object_name = "entry_list"
+	template_name = "simpleblog/entry_list.html"
+	def get_queryset(self):
+		return Entry.all()
 
 
 def new_entry(request):

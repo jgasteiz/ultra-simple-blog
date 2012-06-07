@@ -37,6 +37,12 @@ USIMPLE_BLOG.Core = (function() {
 			$(".line").toggle();
 			$(".new-entry-actioner").toggle();
 			$(".new-entry-container").toggle();
+			if ($(this).attr("data") == "new") {
+				$('#id_content').markItUp(myMarkdownSettings);
+			}
+			else {
+				$('#id_content').markItUpRemove(myMarkdownSettings);
+			}
 		});
 	};
 
@@ -58,6 +64,11 @@ USIMPLE_BLOG.Core = (function() {
 			$(".new-entry-actioner").toggle();
 			$(".post-" + id).toggle();
 			$(".form-" + id).toggle();
+			if ($(this).attr("data") == "edit") {
+				$(".form-" + id + " textarea").markItUp(myMarkdownSettings);
+			} else {
+				$(".form-" + id + " textarea").markItUpRemove(myMarkdownSettings);
+			}
 		});
 	};
 

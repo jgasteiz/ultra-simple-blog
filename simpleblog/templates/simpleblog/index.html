@@ -2,7 +2,7 @@
 
 {% block content %}
 
-	{% load simpleblog %}
+	{% load markup %}
 	
 	{% for entry in entries %}
 			
@@ -14,7 +14,7 @@
 			
 			<!-- Title -->	
 			<div class="entry-title">
-				{{ entry.title|escape }}
+				{{ entry.title|striptags }}
 			</div><!-- End Title -->
 			
 			<!-- Author -->
@@ -25,13 +25,13 @@
 			
 			<!-- Body -->
 			<div class="entry-content">
-				{{ entry.content|allowtags|safe|urlize|linebreaks }}
+				{{ entry.content|striptags|markdown|removetags:"h1 h2 h3 h4 h5 h6"|linebreaks }}
 			</div><!-- End Body -->
 			
 			{% if current_user %}
 			<!-- Edit-Delete controls -->
 			<div class="edit-delete">
-				<i class="icon-pencil toggleEditing" id="{{ entry.key.id }}"></i>
+				<i class="icon-pencil toggleEditing" data="edit" id="{{ entry.key.id }}"></i>
 				<i class="icon-trash toggleDeleting" id="{{ entry.key.id }}"></i>
 			</div><!-- End Edit-Delete controls -->
 			{% endif %}
@@ -46,7 +46,7 @@
 			<textarea id="id_content" name="content">{{ entry.content }}</textarea>
 			<input type="hidden" name="id" value="{{ entry.key.id }}"/>
 			<input class="btn" type="submit" value="Save">
-			<a class="underline-link toggleEditing" id="{{ entry.key.id }}">
+			<a class="underline-link toggleEditing" data="cancel" id="{{ entry.key.id }}">
 				Cancel
 			</a>
 		</form><!-- End Entry form -->

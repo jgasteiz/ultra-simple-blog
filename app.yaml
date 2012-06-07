@@ -32,5 +32,8 @@ handlers:
 - url: /stylesheets
   static_dir: simpleblog/static/stylesheets
 
+- url: /markitup
+  static_dir: simpleblog/static/markitup
+
 - url: /.*
   script: djangoappengine.main.application

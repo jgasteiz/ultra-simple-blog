@@ -1,5 +1,9 @@
 <html>
 	<head>
+		<!-- markItUp! skin -->
+		<link rel="stylesheet" type="text/css" href="/markitup/skins/simple/style.css" />
+		<!--  markItUp! toolbar skin -->
+		<link rel="stylesheet" type="text/css" href="/markitup/sets/markdown/style.css" />
 		<link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
 		<title>Ultra Simple Blog</title>
 	</head>
@@ -22,7 +26,7 @@
 
 		{% if current_user %}
 			<div class="new-entry-actioner">
-				<button class="toggleCreating btn">
+				<button class="toggleCreating btn" data="new">
 					New Entry
 				</button>
 			</div>
@@ -49,7 +53,7 @@
 					<button class="postButton btn" onclick="document.newEntryForm.submit()">
 						Post
 					</button>
-					<a class="toggleCreating underline-link">
+					<a class="toggleCreating underline-link" data="cancel">
 						Cancel
 					</a>
 				</div>
@@ -68,6 +72,10 @@
 			<script type="text/javascript" src="/js/USIMPLE_BLOG.js"></script>
 			<script type="text/javascript" src="/js/USIMPLE_BLOG.Core.js"></script>
 			<script type="text/javascript" src="/js/main.js"></script>
+			<!-- markItUp! -->
+			<script type="text/javascript" src="/markitup/jquery.markitup.js"></script>
+			<!-- markItUp! toolbar settings -->
+			<script type="text/javascript" src="/markitup/sets/markdown/set.js"></script>
 		{% endif %}
 	</body>
 </html>

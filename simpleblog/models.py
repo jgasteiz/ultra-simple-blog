@@ -12,6 +12,9 @@ class Entry(db.Model):
 
 	def own(self, user):
 		return self.author == user
+	
+	def __unicode__(self):
+		return self.title
 
 	def put(self):
 		self.author = users.get_current_user()
