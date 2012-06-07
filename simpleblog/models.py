@@ -10,7 +10,7 @@ class Entry(db.Model):
 	content = db.TextProperty()
 	moderated = db.TextProperty(default="")
 	date = db.DateTimeProperty(auto_now_add=True)
-
+	
 	def own(self, user):
 		return self.author == user
 	

@@ -25,7 +25,7 @@ a {
 	color: black;
 }
 a:hover {
-	background: #E67E7E;
+	color: #B84646;
 	border: 0;
 }
 input[type="text"] {
@@ -141,30 +141,22 @@ img {
 }
 .a-title:hover {
 	background: transparent;
-	color: #E67E7E;
+	color: #B84646;
 }
 .btn {
-	/*Taken from bootstrap*/
 	display: inline-block;
 	cursor: pointer;
-	padding: 4px 10px 4px;
+	padding: 8px 22px;
 	margin-bottom: 0;
 	font-size: 13px;
 	line-height: 18px;
-	color: #333333;
 	text-align: center;
-	text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
 	vertical-align: middle;
-	background-color: #f5f5f5;
-	background-image: -ms-linear-gradient(top, #ffffff, #e6e6e6);
-	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
-	background-repeat: repeat-x;
-	border: 1px solid #cccccc;
-	border-color: #e6e6e6 #e6e6e6 #bfbfbf;
-	border-bottom-color: #b3b3b3;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
+	border: 0;
+	background: #B84646;
+	border: 0;
+	box-shadow: 0px 1px 4px #888;
+	color: whiteSmoke;
 }
 .messages {
 	position: absolute;
@@ -195,6 +187,9 @@ img {
 }
 .text-align-right {
 	text-align: right;
+}
+.margin-left10 {
+	margin-left: 10px;
 }
 /*
 	End - Various
