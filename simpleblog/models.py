@@ -8,6 +8,7 @@ class Entry(db.Model):
 	title = db.TextProperty()
 	slug = db.TextProperty()
 	content = db.TextProperty()
+	moderated = db.TextProperty(default="")
 	date = db.DateTimeProperty(auto_now_add=True)
 
 	def own(self, user):
@@ -17,7 +18,10 @@ class Entry(db.Model):
 		return self.title
 
 	def put(self):
-		self.author = users.get_current_user()
+		if not self.author:
+			self.author = users.get_current_user()
+		if self.author and self.author != users.get_current_user() and users.is_current_user_admin():
+			self.moderated = "moderated"
 		key = super(Entry, self).put()
 		if not self.slug:
 			self.slug = '%i-%s' % (key.id(), slugify(self.title))

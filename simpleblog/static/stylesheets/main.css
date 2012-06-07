@@ -187,6 +187,15 @@ img {
 	height: 1px;
 	margin: 60px 0;
 }
+.moderated {
+	background: #FFF0F0;
+}
+.italic {
+	font-style: italic;
+}
+.text-align-right {
+	text-align: right;
+}
 /*
 	End - Various
 */

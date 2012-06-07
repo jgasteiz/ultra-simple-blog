@@ -17,30 +17,27 @@ def home(request):
 	"""
 	# Check for current user
 	if users.get_current_user():
-		current_user = users.get_current_user()
 		url = users.create_logout_url('/')
 		url_linktext = 'Logout'
 	else:
-		current_user = ''
 		url = users.create_login_url('/')
 		url_linktext = 'Login'
 
+	entries_qs = Entry.all().order('-date')
+	entries_list = []
+	for e in entries_qs:
+		editable = users.is_current_user_admin() or e.author == users.get_current_user()
+		entries_list.append({ 'editable': str(editable), 'entry': e })
+
 	template_values = {
-		'entries': Entry.all().order('-date'),
+		'entries': entries_list,
 		'url': url,
+		'is_admin': users.is_current_user_admin(),
 		'url_linktext': url_linktext,
-		'current_user': current_user,
+		'current_user': users.get_current_user(),
 		'form': EntryForm(),
 		}
 	return render(request, 'simpleblog/index.html', template_values)
-
-
-class EntriesDetailView(ListView):
-	context_object_name = "entry_list"
-	template_name = "simpleblog/entry_list.html"
-	def get_queryset(self):
-		return Entry.all()
-
 
 def new_entry(request):
 	"""
@@ -53,7 +50,6 @@ def new_entry(request):
 			Entry(
 				title = cd['title'],
 				content = cd['content'],
-				author = users.get_current_user(),
 				).put()
 		else:
 			messages.add_message(request, messages.ERROR, "Not a valid entry")
@@ -61,13 +57,12 @@ def new_entry(request):
 
 def edit_entry(request):
 	"""
-	If everything's correct and the entry owner is the user trying to edit it, 
-	edits the entry
+	If everything's correct and the user is the owner (or admin), it's edited
 	"""
 	if request.method == 'POST':
 		entry = Entry.get_by_id(int(request.POST['id']))
 		form = EntryForm(request.POST)
-		if form.is_valid() and entry.own(users.get_current_user()):
+		if form.is_valid() and (entry.own(users.get_current_user()) or users.is_current_user_admin()):
 			cd = form.cleaned_data
 			entry.title = cd['title']
 			entry.content = cd['content']
@@ -81,12 +76,18 @@ def edit_entry(request):
 
 def delete_entry(request, id):
 	"""
-	Deletes an entry if the user is the owner
+	Deletes an entry if the user is the owner or the admin
 	"""
 	entry = Entry.get_by_id(int(id))
-	if entry.own(users.get_current_user()):
+	if entry.own(users.get_current_user()) or users.is_current_user_admin():
 		entry.delete()
 	else:
 		messages.add_message(request, messages.ERROR, "You are not the owner!")
 	return HttpResponseRedirect("/")
 
+
+# class EntriesDetailView(ListView):
+# 	context_object_name = "entry_list"
+# 	template_name = "simpleblog/entry_list.html"
+# 	def get_queryset(self):
+# 		return Entry.all()

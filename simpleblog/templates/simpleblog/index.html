@@ -4,49 +4,53 @@
 
 	{% load markup %}
 	
-	{% for entry in entries %}
-			
-		{% if current_user %}
-		<div class="post post-{{ entry.key.id }}">
+	{% for e in entries %}
+
+		{% if e.editable == "True" %}
+		<div class="post post-{{ e.entry.key.id }}">
 		{% else %}
 		<div class="post">
 		{% endif %}
 			
 			<!-- Title -->	
 			<div class="entry-title">
-				{{ entry.title|striptags }}
+				{{ e.entry.title|striptags }}
 			</div><!-- End Title -->
 			
 			<!-- Author -->
 			<div class="entry-author">
-				On {{ entry.date }}, by
-				<b>{{ entry.author.nickname }}</b>
+				Posted on {{ e.entry.date }}, by
+				<b>{{ e.entry.author.nickname }}</b>
 			</div><!-- End Author -->
-			
+
 			<!-- Body -->
 			<div class="entry-content">
-				{{ entry.content|striptags|markdown|removetags:"h1 h2 h3 h4 h5 h6"|linebreaks }}
+				{{ e.entry.content|striptags|urlize|markdown|removetags:"h1 h2 h3 h4 h5 h6" }}
 			</div><!-- End Body -->
+
+			<div class="text-align-right italic {{ e.entry.moderated }}">
+				{{ e.entry.moderated }}
+			</div>
 			
-			{% if current_user %}
+			{% if e.editable == "True" %}
 			<!-- Edit-Delete controls -->
 			<div class="edit-delete">
-				<i class="icon-pencil toggleEditing" data="edit" id="{{ entry.key.id }}"></i>
-				<i class="icon-trash toggleDeleting" id="{{ entry.key.id }}"></i>
+				<i class="icon-pencil toggleEditing" data="edit" id="{{ e.entry.key.id }}"></i>
+				<i class="icon-trash toggleDeleting" id="{{ e.entry.key.id }}"></i>
 			</div><!-- End Edit-Delete controls -->
 			{% endif %}
 
 		</div>
 		
-		{% if current_user %}
+		{% if e.editable == "True" %}
 		<!-- Entry form -->
-		<form class="edit-entry-form form-{{ entry.key.id }}" action="edit_entry/" method="post">
+		<form class="edit-entry-form form-{{ e.entry.key.id }}" action="edit_entry/" method="post">
 			{% csrf_token %}
-			<input id="id_title" type="text" name="title" placeholder="Title" value="{{ entry.title }}"/>
-			<textarea id="id_content" name="content">{{ entry.content }}</textarea>
-			<input type="hidden" name="id" value="{{ entry.key.id }}"/>
+			<input id="id_title" type="text" name="title" placeholder="Title" value="{{ e.entry.title }}"/>
+			<textarea id="id_content" name="content">{{ e.entry.content }}</textarea>
+			<input type="hidden" name="id" value="{{ e.entry.key.id }}"/>
 			<input class="btn" type="submit" value="Save">
-			<a class="underline-link toggleEditing" data="cancel" id="{{ entry.key.id }}">
+			<a class="underline-link toggleEditing" data="cancel" id="{{ e.entry.key.id }}">
 				Cancel
 			</a>
 		</form><!-- End Entry form -->

@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import url, patterns, include
 
-from simpleblog.views import home, new_entry, edit_entry, delete_entry, EntriesDetailView
+from simpleblog.views import home, new_entry, edit_entry, delete_entry#, EntriesDetailView
 from django.views.generic import ListView, DetailView
 from simpleblog.models import Entry
 
