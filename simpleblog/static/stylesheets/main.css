@@ -3,23 +3,21 @@
 */
 body {
 	font-family: "Times New Roman", Helvetica, Arial;
-	font-weight: 300;
+	font-size: 18px;
 	max-width: 900px;
 	background: #252525;
 	margin: 0 auto;
 }
 header {
 	padding: 40px 20px 20px;
-	height: 96px;
+	height: 120px;
 	background: #003F00;
 	position: relative;
 }
 header h1 {
-	margin: 0;
-	margin-bottom: 10px;
+	margin: 0 0 30px;
 }
 header h1 a {
-	font-size: 1.3em;
 	border: 0;
 	color: whiteSmoke;
 }
