@@ -2,7 +2,7 @@
 
 * The main app is in simpleblog/ with its templates and staticfiles
 
-## Installed apps
+### Installed apps
 
 * [django-nonrel](http://bitbucket.org/wkornewald/django-nonrel/get/tip.zip "django-nonrel")
 * [djangoappengine](http://bitbucket.org/wkornewald/djangoappengine/get/tip.zip "djangoappengine")
@@ -12,10 +12,10 @@
 * [django-testapp](http://bitbucket.org/wkornewald/django-testapp/get/tip.zip "django-testapp")
 * [markdown](http://freewisdom.org/projects/python-markdown/ "markdown")
 
-## Javascript text-editor
+### Javascript text-editor
 
 * [Markitup(markdown-mode)](http://markitup.jaysalvat.com/home/ "Markitup(markdown-mode")
 
-## Icons used
+### Icons used
 
 * [Glyphicons](http://glyphicons.com/ "Glyphicons")
