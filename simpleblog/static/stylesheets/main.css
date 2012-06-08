@@ -2,7 +2,7 @@
 	Simple elements
 */
 body {
-	font-family: "Times New Roman", Helvetica, Arial;
+	font-family: "PT Serif",Georgia,Times,"Times New Roman",serif;
 	font-size: 18px;
 	max-width: 900px;
 	background: #252525;
@@ -14,12 +14,11 @@ header {
 	background: #003F00;
 	position: relative;
 }
-header h1 {
-	margin: 0 0 30px;
-}
 header h1 a {
 	border: 0;
 	color: whiteSmoke;
+	position: absolute;
+	top: 50px;
 }
 header h1 a:hover {
 	background: transparent;
@@ -127,7 +126,9 @@ li {
 	background: transparent;
 }
 .new-entry-actioner {
-	float: right;
+	position: absolute;
+	right: 20px;
+	top: 119px;
 }
 .messages {
 	position: absolute;
@@ -163,6 +164,7 @@ li {
 	position: relative;
 }
 .entry-title {
+	font-weight: bold;
 	font-size: 2em;
 	margin-bottom: 10px;
 }
