@@ -1,4 +1,4 @@
-# Ultra Simple Blog
+# Ultra Simple Blog
 
 * The main app is in simpleblog/ with its templates and staticfiles
 
