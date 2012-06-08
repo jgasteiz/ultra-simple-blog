@@ -9,7 +9,7 @@
 	</head>
 	<body>
 
-		<header>
+		<header class="main">
 			<div class="authentication">
 				{% if current_user %}
 					Hi {{ current_user }},
@@ -45,6 +45,7 @@
 			{% if current_user %}
 				<div class="new-entry-container">
 					<form class="new-entry-form" action="new_entry/" name="newEntryForm" method="post">
+						<h2 class="tip">New entry</h2>
 						{% csrf_token %}
 						{% for field in form %}
 							{{ field }}
@@ -62,7 +63,7 @@
 
 			{% block content %}{% endblock %}
 
-			<footer>
+			<footer class="main">
 				<h2>About</h2>
 				<ul>
 					<li>

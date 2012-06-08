@@ -4,28 +4,31 @@
 
 	{% load markup %}
 	
-	{% for e in entries %}
+	{% for e in entry_list %}
 
 		{% if e.editable == "True" %}
-		<div class="post post-{{ e.entry.key.id }}">
+		<article class="post post-{{ e.entry.key.id }}">
+
 		{% else %}
-		<div class="post">
+		<article class="post">
 		{% endif %}
 			
-			<!-- Title -->	
-			<div class="entry-title">
-				{{ e.entry.title|striptags }}
-			</div><!-- End Title -->
-			
-			<!-- Author -->
-			<div class="entry-author">
-				Posted on {{ e.entry.date }}, by
-				<strong>{{ e.entry.author.nickname }}</strong>
-			</div><!-- End Author -->
+			<header>
+				<!-- Author -->
+				<div class="entry-author">
+					Posted on {{ e.entry.date }}, by
+					<strong>{{ e.entry.author.nickname }}</strong>
+				</div><!-- End Author -->
+
+				<!-- Title -->	
+				<h1 class="entry-title">
+					{{ e.entry.title|striptags }}
+				</h1><!-- End Title -->
+			</header>
 
 			<!-- Body -->
 			<div class="entry-content">
-				{{ e.entry.content|striptags|urlize|markdown|removetags:"h1 h2 h3 h4 h5 h6" }}
+				{{ e.entry.content|striptags|markdown|removetags:"h1 h2 h3 h4 h5 h6" }}
 			</div><!-- End Body -->
 
 			<div class="text-align-right italic {{ e.entry.moderated }}">
@@ -40,20 +43,21 @@
 			</div><!-- End Edit-Delete controls -->
 			{% endif %}
 
-		</div>
+		</article>
 		
 		{% if e.editable == "True" %}
-		<!-- Entry form -->
-		<form class="edit-entry-form form-{{ e.entry.key.id }}" action="edit_entry/" method="post">
-			{% csrf_token %}
-			<input id="id_title" type="text" name="title" placeholder="Title" value="{{ e.entry.title }}"/>
-			<textarea id="id_content" name="content">{{ e.entry.content }}</textarea>
-			<input type="hidden" name="id" value="{{ e.entry.key.id }}"/>
-			<input class="btn" type="submit" value="Save">
-			<a class="underline-link toggleEditing margin-left10" data="cancel" id="{{ e.entry.key.id }}">
-				Cancel
-			</a>
-		</form><!-- End Entry form -->
+			<!-- Entry form -->
+			<form class="edit-entry-form form-{{ e.entry.key.id }}" action="edit_entry/" method="post">
+				<h2 class="tip">Edit entry</h2>
+				{% csrf_token %}
+				<input id="id_title" type="text" name="title" placeholder="Title" value="{{ e.entry.title }}"/>
+				<textarea id="id_content" name="content">{{ e.entry.content }}</textarea>
+				<input type="hidden" name="id" value="{{ e.entry.key.id }}"/>
+				<input class="btn" type="submit" value="Save">
+				<a class="underline-link toggleEditing margin-left10" data="cancel" id="{{ e.entry.key.id }}">
+					Cancel
+				</a>
+			</form><!-- End Entry form -->
 		{% endif %}
 
 		<div class="line"></div>
@@ -61,4 +65,3 @@
 	{% endfor %}
 
 {% endblock %}
-

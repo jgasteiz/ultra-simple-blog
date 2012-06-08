@@ -7,25 +7,35 @@ body {
 	max-width: 900px;
 	background: #252525;
 	margin: 0 auto;
+	line-height: 1.5em;
 }
-header {
+header.main {
 	padding: 40px 20px 20px;
 	height: 120px;
 	background: #003F00;
 	position: relative;
 }
-header h1 a {
-	border: 0;
-	color: whiteSmoke;
+header.main h1 {
 	position: absolute;
 	top: 50px;
+	margin: 0;
+	font-size: 2.6em;
+	line-height: 0.8;
 }
-header h1 a:hover {
+header.main h1 a {
+	border: 0;
+	color: whiteSmoke;
+}
+header.main h1 a:hover {
 	background: transparent;
-	color: #FFC757;
+	color: whiteSmoke;
 }
-footer {
+footer.main {
 	margin: 20px 0;
+}
+h1 {
+	font-size: 2.2em;
+	margin-top: 0;
 }
 a {
 	text-decoration: none;
@@ -76,7 +86,7 @@ li {
 */
 .edit-delete {
 	position: absolute;
-	top: -16px;
+	top: -30px;
 	right: 0;
 }
 [class^="icon-"],
@@ -128,7 +138,7 @@ li {
 .new-entry-actioner {
 	position: absolute;
 	right: 20px;
-	top: 119px;
+	top: 124px;
 }
 .messages {
 	position: absolute;
@@ -163,14 +173,15 @@ li {
 .post {
 	position: relative;
 }
-.entry-title {
-	font-weight: bold;
-	font-size: 2em;
-	margin-bottom: 10px;
-}
 .entry-author {
+	font-family: "PT Sans","Helvetica Neue",Arial,sans-serif;
 	text-align: right;
-	font-style: italic;
+	color: #888;
+	font-size: 0.9em;
+}
+.tip {
+	font-family: "PT Sans","Helvetica Neue",Arial,sans-serif;
+	color: #888;
 }
 /*
 	End - Containers
@@ -193,6 +204,12 @@ li {
 	border: 0;
 	box-shadow: 0px 1px 4px #888;
 	color: whiteSmoke;
+}
+.btn:hover {
+	background: #368836;
+}
+.btn:active {
+	background: #267826;
 }
 .underline-link {
 	vertical-align: sub;
