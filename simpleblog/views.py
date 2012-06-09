@@ -88,14 +88,17 @@ def new_entry(request):
 	"""
 	if request.method == 'POST':
 		form = EntryForm(request.POST)
-		if form.is_valid():
+		if form.is_valid() and users.get_current_user():
 			cd = form.cleaned_data
 			Entry(
 				title = cd['title'],
 				content = cd['content'],
 				).put()
 		else:
-			messages.add_message(request, messages.ERROR, "Not a valid entry")
+			if not form.is_valid():
+				messages.add_message(request, messages.ERROR, "Not a valid entry")
+			elif not users.get_current_user():
+				messages.add_message(request, messages.ERROR, "Must be logged in")
 	return HttpResponseRedirect("/")
 
 
