@@ -4,25 +4,29 @@ from django.template.defaultfilters import slugify
 from django.shortcuts import render
 from django.contrib import messages
 
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
+from google.appengine.ext import db
 from google.appengine.api import users
 from simpleblog.models import Entry
 from simpleblog.forms import EntryForm
 
-class EntryListView(ListView):
+class BlogView(ListView):
 	"""
 	Main page. Loads all the entries, ordered by date.
 	If request method is post, there may be creating or editing an entry.
 	"""
-	context_object_name = "entry_list"
-	template_name = "simpleblog/index.html"
+	paginate_by = 5
+	context_object_name = 'entry_list'
+	template_name = 'simpleblog/index.html'
 
 	def get_queryset(self):
 		entries_qs = Entry.all().order('-date')
 		entry_list = []
 		for e in entries_qs:
 			editable = users.is_current_user_admin() or e.author == users.get_current_user()
+			if editable:
+				e.id = str(e.key().id())
 			entry_list.append({ 'editable': str(editable), 'entry': e })
 		return entry_list
 	
@@ -35,7 +39,39 @@ class EntryListView(ListView):
 			url = users.create_login_url('/')
 			url_linktext = 'Login'
 
-		context = super(EntryListView, self).get_context_data(**kwargs)
+		context = super(BlogView, self).get_context_data(**kwargs)
+		context.update({
+			'url': url,
+			'url_linktext': url_linktext,
+			'is_admin': users.is_current_user_admin(),
+			'current_user': users.get_current_user(),
+			'form': EntryForm(),
+		})
+		return context
+
+
+class BlogPostView(ListView):
+	
+	context_object_name = 'entry_list'
+	template_name = 'simpleblog/index.html'
+
+	def get_queryset(self):
+		e = Entry.all().filter('slug =', self.kwargs['slug']).get()
+		editable = users.is_current_user_admin() or e.author == users.get_current_user()
+		if editable:
+			e.id = str(e.key().id())
+		return [{"entry": e, "editable": str(editable)}]
+
+	def get_context_data(self, **kwargs):
+		# Sets login/logout urls
+		if users.get_current_user():
+			url = users.create_logout_url('/')
+			url_linktext = 'Logout'
+		else:
+			url = users.create_login_url('/')
+			url_linktext = 'Login'
+
+		context = super(BlogPostView, self).get_context_data(**kwargs)
 		context.update({
 			'url': url,
 			'url_linktext': url_linktext,

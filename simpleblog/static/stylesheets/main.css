@@ -12,7 +12,7 @@ body {
 header.main {
 	padding: 40px 20px 20px;
 	height: 120px;
-	background: #003F00;
+	background: #092E20;
 	position: relative;
 }
 header.main h1 {
@@ -31,10 +31,14 @@ header.main h1 a:hover {
 	color: whiteSmoke;
 }
 footer.main {
-	margin: 20px 0;
+	padding-top: 80px;
 }
 h1 {
 	font-size: 2.2em;
+	margin-top: 0;
+	line-height: 1.20em;
+}
+h2 {
 	margin-top: 0;
 }
 a {
@@ -84,11 +88,6 @@ li {
 /*
 	Controls
 */
-.edit-delete {
-	position: absolute;
-	top: -30px;
-	right: 0;
-}
 [class^="icon-"],
 [class*=" icon-"] {
 	cursor: pointer;
@@ -143,7 +142,7 @@ li {
 .messages {
 	position: absolute;
 	left: 20px;
-	top: 90px;
+	top: 100px;
 	padding: 10px 20px 5px;
 	color: #B94A48;
 	background-color: #F2DEDE;
@@ -168,16 +167,22 @@ li {
 }
 .edit-entry-form {
 	display: none;
-	margin-top: 40px;
 }
 .post {
 	position: relative;
+	background: url('dotted-border.png') bottom left repeat-x;
+	margin-bottom: 60px;
+	padding-bottom: 40px;
+}
+.entry-title a {
+	border: 0;
 }
 .entry-author {
 	font-family: "PT Sans","Helvetica Neue",Arial,sans-serif;
 	text-align: right;
 	color: #888;
 	font-size: 0.9em;
+	margin-bottom: 20px;
 }
 .tip {
 	font-family: "PT Sans","Helvetica Neue",Arial,sans-serif;
@@ -199,22 +204,26 @@ li {
 	line-height: 18px;
 	text-align: center;
 	vertical-align: middle;
+	background: #326342;
 	border: 0;
-	background: #469846;
-	border: 0;
-	box-shadow: 0px 1px 4px #888;
+	box-shadow: 1px 1px 2px #666;
 	color: whiteSmoke;
 }
 .btn:hover {
-	background: #368836;
+	background: #234F32;
 }
 .btn:active {
-	background: #267826;
+	background: #1F4B2E;
 }
 .underline-link {
 	vertical-align: sub;
 	border-bottom: 1px solid black;
 	cursor: pointer;
+}
+.underline-link:hover {
+	color: #004400;
+	background: #E0FFB8;
+	border: 0;
 }
 .line {
 	background: #E5E5E5;
@@ -233,6 +242,15 @@ li {
 .margin-left10 {
 	margin-left: 10px;
 }
+.float-right {
+	float: right;
+}
+.older {
+	float: right;
+}
+.newer {
+	float: left;
+}
 /*
 	End - Various
 */
@@ -244,7 +262,8 @@ li {
 	width: 100%;
 	padding: 8px;
 	margin-top: 2px;
-	height: 120px;
+	height: 200px;
+	font-size: 1.4em;
 }
 .markitupheader ul a {
 	background-position: 2px;

@@ -1,67 +1,63 @@
 {% extends "simpleblog/base.html" %}
 
-{% block content %}
+{% block entry %}
 
 	{% load markup %}
-	
-	{% for e in entry_list %}
 
-		{% if e.editable == "True" %}
-		<article class="post post-{{ e.entry.key.id }}">
+	<!-- Article -->
+	<article class="post post-{{ e.entry.id }}">
+		
+		<!-- Header -->
+		<header>
+			<!-- Author -->
+			<div class="entry-author">
+				Posted on {{ e.entry.date }}, by
+				<strong>{{ e.entry.author.nickname }}</strong>
+			</div><!-- End Author -->
 
-		{% else %}
-		<article class="post">
-		{% endif %}
+			<!-- Edit-Delete controls -->
+			<div class="float-right">
+				{% if e.editable == "True" %}
+				<i class="icon-pencil toggleEditing" data="edit" id="{{ e.entry.id }}"></i>
+				<i class="icon-trash toggleDeleting" id="{{ e.entry.id }}"></i>
+				{% endif %}
+			</div><!-- End Edit-Delete controls -->
 			
-			<header>
-				<!-- Author -->
-				<div class="entry-author">
-					Posted on {{ e.entry.date }}, by
-					<strong>{{ e.entry.author.nickname }}</strong>
-				</div><!-- End Author -->
-
-				<!-- Title -->	
-				<h1 class="entry-title">
+			<!-- Title -->	
+			<h1 class="entry-title">
+				<a href="/{{ e.entry.slug }}">
 					{{ e.entry.title|striptags }}
-				</h1><!-- End Title -->
-			</header>
+				</a>
+			</h1><!-- End Title -->
 
-			<!-- Body -->
-			<div class="entry-content">
-				{{ e.entry.content|striptags|markdown|removetags:"h1 h2 h3 h4 h5 h6" }}
-			</div><!-- End Body -->
+		</header><!-- End Header -->
 
+		<!-- Body -->
+		<div class="entry-content">
+			
+			{{ e.entry.content|striptags|markdown|removetags:"h1 h2 h3 h4 h5 h6" }}
+			
 			<div class="text-align-right italic {{ e.entry.moderated }}">
 				{{ e.entry.moderated }}
 			</div>
-			
-			{% if e.editable == "True" %}
-			<!-- Edit-Delete controls -->
-			<div class="edit-delete">
-				<i class="icon-pencil toggleEditing" data="edit" id="{{ e.entry.key.id }}"></i>
-				<i class="icon-trash toggleDeleting" id="{{ e.entry.key.id }}"></i>
-			</div><!-- End Edit-Delete controls -->
-			{% endif %}
 
-		</article>
+		</div><!-- End Body -->
 		
-		{% if e.editable == "True" %}
-			<!-- Entry form -->
-			<form class="edit-entry-form form-{{ e.entry.key.id }}" action="edit_entry/" method="post">
-				<h2 class="tip">Edit entry</h2>
-				{% csrf_token %}
-				<input id="id_title" type="text" name="title" placeholder="Title" value="{{ e.entry.title }}"/>
-				<textarea id="id_content" name="content">{{ e.entry.content }}</textarea>
-				<input type="hidden" name="id" value="{{ e.entry.key.id }}"/>
-				<input class="btn" type="submit" value="Save">
-				<a class="underline-link toggleEditing margin-left10" data="cancel" id="{{ e.entry.key.id }}">
-					Cancel
-				</a>
-			</form><!-- End Entry form -->
-		{% endif %}
+	</article><!-- End Article -->
 
-		<div class="line"></div>
-
-	{% endfor %}
+	{% if e.editable == "True" %}
+		<!-- Entry form -->
+		<form class="edit-entry-form form-{{ e.entry.id }}" action="/edit_entry/" method="post">
+			<h2 class="tip">Edit entry</h2>
+			{% csrf_token %}
+			<input id="id_title" type="text" name="title" placeholder="Title" value="{{ e.entry.title }}"/>
+			<textarea id="id_content" name="content">{{ e.entry.content }}</textarea>
+			<input type="hidden" name="id" value="{{ e.entry.id }}"/>
+			<input class="btn" type="submit" value="Save">
+			<a class="underline-link toggleEditing margin-left10" data="cancel" id="{{ e.entry.id }}">
+				Cancel
+			</a>
+		</form><!-- End Entry form -->
+	{% endif %}
 
 {% endblock %}
