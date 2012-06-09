@@ -73,12 +73,15 @@ class BlogView(ListView):
 			'is_admin': users.is_current_user_admin(),
 			'current_user': users.get_current_user(),
 			'form': EntryForm(),
+			'blocks': {'footer': 1},
 		})
 		return context
 
 
 class BlogPostView(ListView):
-	
+	"""
+	Single page for an entry
+	"""
 	context_object_name = 'entry_list'
 	template_name = 'simpleblog/index.html'
 
@@ -105,10 +108,14 @@ class BlogPostView(ListView):
 			'is_admin': users.is_current_user_admin(),
 			'current_user': users.get_current_user(),
 			'form': EntryForm(),
+			'blocks': {},
 		})
 		return context
 
 class DeletePostView(RedirectView):
+	"""
+	For deleting a post
+	"""
 	def get(self, request):
 		entry = Entry.get_by_id(int(request.GET['entry']))
 		if entry.own(users.get_current_user()) or users.is_current_user_admin():
