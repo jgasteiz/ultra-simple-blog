@@ -85,7 +85,7 @@ USIMPLE_BLOG.Core = (function() {
 		$(".toggleDeleting").click(function() {
 			var id = $(this).attr("id");
 			if(confirm("You're about to delete this entry, do you want to continue?")) {
-				location.href = "delete_entry/?entry=" + id;
+				$("#delete_form_" + id).submit();
 			}
 		});
 	};

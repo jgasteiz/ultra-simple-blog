@@ -53,10 +53,16 @@
 			<input id="id_title" type="text" name="title" placeholder="Title" value="{{ e.entry.title }}"/>
 			<textarea id="id_content" name="content">{{ e.entry.content }}</textarea>
 			<input type="hidden" name="id" value="{{ e.entry.id }}"/>
+			<input type="hidden" name="type" value="edit"/>
 			<input class="btn" type="submit" value="Save">
 			<a class="underline-link toggleEditing margin-left10" data="cancel" id="{{ e.entry.id }}">
 				Cancel
 			</a>
+		</form><!-- End Entry form -->
+		<form id="delete_form_{{ e.entry.id }}" action="/delete_entry/" method="post">
+			{% csrf_token %}
+			<input type="hidden" name="id" value="{{ e.entry.id }}"/>
+			<input type="hidden" name="type" value="delete"/>
 		</form><!-- End Entry form -->
 	{% endif %}
 
