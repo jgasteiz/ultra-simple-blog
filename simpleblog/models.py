@@ -20,6 +20,8 @@ class ContextManager():
 			blocks =  {'footer': 1}
 		elif type == 'single':
 			blocks = ''
+		elif type == 'author':
+			blocks = {'footer': 1}
 		context = {
 			'url': url,
 			'url_linktext': url_linktext,
@@ -33,20 +35,11 @@ class ContextManager():
 
 class BlogManager():
 	def published(self):
-		entries_qs = Entry.all().order('-date')
-		entry_list = []
-		for e in entries_qs:
-			editable = users.is_current_user_admin() or e.author == users.get_current_user()
-			if editable:
-				e.id = str(e.key().id())
-			entry_list.append({ 'editable': str(editable), 'entry': e })
-		return entry_list
+		return Entry.all().order('-date')
 	def single(self, slug):
-		e = Entry.all().filter('slug =', slug).get()
-		editable = users.is_current_user_admin() or e.author == users.get_current_user()
-		if editable:
-			e.id = str(e.key().id())
-		return [{"entry": e, "editable": str(editable)}]
+		return [Entry.all().filter('slug =', slug).get()]
+	def author(self, author):
+		return Entry.all().filter('author =', users.User(author)).order('-date')
 
 class Entry(db.Model):
 	"""

@@ -194,6 +194,10 @@ li {
 	font-family: 'lucida grande', 'helvetica neue', helvetica, sans-serif;
 	color: #888;
 }
+.no-underline {
+	text-decoration: none;
+	border: 0;
+}
 /*
 	End - Containers
 */

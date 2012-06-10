@@ -45,7 +45,7 @@ class BlogView(ListView):
 		return context
 
 
-class BlogPostView(ListView):
+class PostView(ListView):
 	"""
 	Single page for an entry
 	"""
@@ -56,8 +56,24 @@ class BlogPostView(ListView):
 		return Entry.objects.single(self.kwargs['slug'])
 
 	def get_context_data(self, **kwargs):
-		context = super(BlogPostView, self).get_context_data(**kwargs)
+		context = super(PostView, self).get_context_data(**kwargs)
 		context.update(Entry.context.get_context('single'))
 		return context
 
-	
+class AuthorView(ListView):
+	"""
+	Author's posts
+	"""
+	context_object_name = 'entry_list'
+	template_name = 'simpleblog/index.html'
+
+	def get_queryset(self):
+		return Entry.objects.author(self.kwargs['author'])
+
+	def get_context_data(self, **kwargs):
+		context = super(AuthorView, self).get_context_data(**kwargs)
+		context.update(Entry.context.get_context('author'))
+		return context
+
+
+
