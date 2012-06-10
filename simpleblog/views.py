@@ -21,60 +21,28 @@ class BlogView(ListView):
 	template_name = 'simpleblog/index.html'
 
 	def get_queryset(self):
-		entries_qs = Entry.all().order('-date')
-		entry_list = []
-		for e in entries_qs:
-			editable = users.is_current_user_admin() or e.author == users.get_current_user()
-			if editable:
-				e.id = str(e.key().id())
-			entry_list.append({ 'editable': str(editable), 'entry': e })
-		return entry_list
+		return Entry.objects.published()
 
 	def post(self, request, *args, **kwargs):
 		"""
 		If everything's correct, creates/edits an entry
 		"""
 		form = EntryForm(request.POST)
-		if form.is_valid() and users.get_current_user():
+		e = Entry.get_by_id(int(request.POST['id']))
+		if not e:
+			e = Entry()
+		if e.is_valid(form=form, request=request):
 			cd = form.cleaned_data
-			e = Entry.get_by_id(int(request.POST['id']))
-			if e:
-				if e.own(users.get_current_user()):
-					e.title = cd['title']
-					e.content = cd['content']
-					e.put()
-				else:
-					messages.add_message(request, messages.ERROR, "You are not the owner!")
-			else:
-				Entry(
-					title = cd['title'],
-					content = cd['content'],
-					).put()
-		else:
-			if not form.is_valid():
-				messages.add_message(request, messages.ERROR, "Not a valid entry")
-			elif not users.get_current_user():
-				messages.add_message(request, messages.ERROR, "Must be logged in")
+			e.title = cd['title']
+			e.content = cd['content']
+			e.put()
 		return HttpResponseRedirect("/")
 	
 	def get_context_data(self, **kwargs):
-		# Sets login/logout urls
-		if users.get_current_user():
-			url = users.create_logout_url('/')
-			url_linktext = 'Logout'
-		else:
-			url = users.create_login_url('/')
-			url_linktext = 'Login'
-
+		user_context = Entry.users.user_context()
 		context = super(BlogView, self).get_context_data(**kwargs)
-		context.update({
-			'url': url,
-			'url_linktext': url_linktext,
-			'is_admin': users.is_current_user_admin(),
-			'current_user': users.get_current_user(),
-			'form': EntryForm(),
-			'blocks': {'footer': 1},
-		})
+		context.update(user_context)
+		context.update({'blocks': {'footer': 1},})
 		return context
 
 
@@ -86,30 +54,13 @@ class BlogPostView(ListView):
 	template_name = 'simpleblog/index.html'
 
 	def get_queryset(self):
-		e = Entry.all().filter('slug =', self.kwargs['slug']).get()
-		editable = users.is_current_user_admin() or e.author == users.get_current_user()
-		if editable:
-			e.id = str(e.key().id())
-		return [{"entry": e, "editable": str(editable)}]
+		return Entry.objects.single(self.kwargs['slug'])
 
 	def get_context_data(self, **kwargs):
-		# Sets login/logout urls
-		if users.get_current_user():
-			url = users.create_logout_url('/')
-			url_linktext = 'Logout'
-		else:
-			url = users.create_login_url('/')
-			url_linktext = 'Login'
-
+		user_context = Entry.users.user_context()
 		context = super(BlogPostView, self).get_context_data(**kwargs)
-		context.update({
-			'url': url,
-			'url_linktext': url_linktext,
-			'is_admin': users.is_current_user_admin(),
-			'current_user': users.get_current_user(),
-			'form': EntryForm(),
-			'blocks': {},
-		})
+		context.update(user_context)
+		context.update({'blocks': {},})
 		return context
 
 class DeletePostView(RedirectView):

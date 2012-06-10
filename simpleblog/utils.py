@@ -47,8 +47,6 @@ def uuslug(s, instance=None):
     # If an instance is passed
     if instance:
         def get_query():
-            if hasattr(instance, 'objects'):
-                raise Exception("Error: you must pass an instance to uuslug, not a model.")
             # Adapted to app engine datastore
             query = instance.__class__.all().filter('slug =', slug).get()
             return query
