@@ -26,3 +26,15 @@ indexes:
   - name: author
   - name: date
     direction: desc
+
+- kind: Entry
+  properties:
+  - name: author.nickname
+  - name: date
+    direction: desc
+
+- kind: Entry
+  properties:
+  - name: author.nickname()
+  - name: date
+    direction: desc

@@ -39,7 +39,13 @@ class BlogManager():
 	def single(self, slug):
 		return [Entry.all().filter('slug =', slug).get()]
 	def author(self, author):
-		return Entry.all().filter('author =', users.User(author)).order('-date')
+		"""Need to find a better way to do this"""
+		entries_qs = Entry.all().order('-date')
+		entry_list = []
+		for e in entries_qs:
+			if e.author.nickname() == author:
+				entry_list.append(e)
+		return entry_list
 
 class Entry(db.Model):
 	"""
