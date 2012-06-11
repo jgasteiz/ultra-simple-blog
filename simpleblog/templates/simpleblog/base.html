@@ -66,59 +66,7 @@
 				</div>
 			{% endif %}
 
-			{% for entry in entry_list %}
-
-				{% block entry %}{% endblock %}
-
-			{% empty %}
-
-			<h2>Nothing to show!</h2>
-
-			{% endfor %}
-
-			
-			{% if blocks.footer %}
-
-				{% if is_paginated %}
-					<div class="pagination">
-						{% if page_obj.has_previous %}
-							<a class="newer" href="?page={{ page_obj.previous_page_number }}">
-							    ← Newer
-							</a>
-						{% endif %}
-						{% if page_obj.has_next %}
-							<a class="older" href="?page={{ page_obj.next_page_number }}">
-							    Older →
-							</a>
-						{% endif %}
-					</div>
-				{% endif %}
-
-				<footer class="main">
-					<h2>About</h2>
-					<ul>
-						<li>
-							This is a simple blogging tool developed using Django and deployed on Google App Engine. If you want to take a look at the code, here's the repo: <a target="_blank" href="https://github.com/jgasteiz/ultra-simple-blog">Ultra Simple Blog - Github</a>.
-						</li>
-						<li>
-							Markdown is the markup language used in Ultra Simple Blog.
-							<a target="_blank" href="http://warpedvisions.org/projects/markdown-cheat-sheet/">[cheat sheet](http://url.com)</a>
-							|
-							<a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">[about](http://url.com)</a>
-						</li>
-						<li>
-							<a target="_blank" href="http://markitup.jaysalvat.com/home/">Markitup</a> is the jQuery markup editor used for writing entries.
-						</li>
-						<li>
-							<a href="http://glyphicons.com/" target="_blank">Glyphicons</a> were used for "edit" and "trash" icons.
-						</li>
-						<li>
-							Inspiration taken from <a target="_blank" href="http://octopress.org/">Octopress</a>.
-						</li>
-					</ul>
-				</footer>
-
-			{% endif %}
+			{% block content %}{% endblock %}
 
 		</div>
 

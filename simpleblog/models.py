@@ -7,6 +7,7 @@ from django.contrib import messages
 
 class ContextManager():
 	def get_context(self, type):
+		"""Return a contexts based on authenticated user"""
 		# Sets login/logout urls
 		if users.get_current_user():
 			url = users.create_logout_url('/')
@@ -16,28 +17,16 @@ class ContextManager():
 			url = users.create_login_url('/')
 			url_linktext = 'Login'
 			form = ''
-		if type == 'main':
-			blocks =  {'footer': 1}
-		elif type == 'single':
-			blocks = ''
-		elif type == 'author':
-			blocks = {'footer': 1}
 		context = {
 			'url': url,
 			'url_linktext': url_linktext,
-			'is_admin': users.is_current_user_admin(),
 			'current_user': users.get_current_user(),
 			'form': form,
-			'blocks': blocks
 		}
 		return context
 
-
-class BlogManager():
-	def published(self):
-		return Entry.all().order('-date')
-	def single(self, slug):
-		return [Entry.all().filter('slug =', slug).get()]
+class EntryManager():
+	"""Manager for the Entry model"""
 	def author(self, author):
 		"""Need to find a better way to do this"""
 		entries_qs = Entry.all().order('-date')
@@ -59,7 +48,7 @@ class Entry(db.Model):
 	moderated = db.StringProperty(default="")
 	date = db.DateTimeProperty(auto_now_add=True)
 
-	objects = BlogManager()
+	objects = EntryManager()
 	context = ContextManager()
 	
 	def __unicode__(self):

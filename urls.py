@@ -1,27 +1,28 @@
 # -*- coding: utf-8 -*-
 from django.conf.urls.defaults import url, patterns
-from simpleblog.views import BlogView, PostView, AuthorView
+from simpleblog.views import *
 
 handler500 = 'djangotoolbox.errorviews.server_error'
 
 urlpatterns = patterns('',
 	url(r'^_ah/warmup$', 'djangoappengine.views.warmup'),
 	url(r'^$', 
-		BlogView.as_view(),
-		name='blog'),
+		EntryListView.as_view(),
+		name='entry_list'),
+	url(r'author/(?P<author>[\w-]+)/$',
+		AuthorListView.as_view(),
+		name='author'),
+	url(r'single/(?P<slug>[\w-]+)/$',
+		EntryDetailView.as_view(),
+		name='post'),
+
 	url(r'new_entry/', 
-		BlogView.as_view(),
+		EntryCreateView.as_view(),
 		name='new_entry'),
 	url(r'edit_entry/', 
-		BlogView.as_view(),
+		EntryEditView.as_view(),
 		name='edit_entry'),
 	url(r'delete_entry/', 
-		BlogView.as_view(),
-		name='delete_entry'),
-	url(r'author/(?P<author>[\w-]+)/$',
-		AuthorView.as_view(),
-		name='author'),
-	url(r'(?P<slug>[\w-]+)/$',
-		PostView.as_view(),
-		name='post'),	
+		EntryDeleteView.as_view(),
+		name='delete_entry'),	
 )

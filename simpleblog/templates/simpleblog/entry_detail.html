@@ -1,0 +1,74 @@
+{% extends "simpleblog/base.html" %}
+
+{% block content %}
+
+	{% if entry %}
+
+		{% load markup %}
+
+		<!-- Article -->
+		<article class="post post-{{ entry.key.id }}">
+			
+			<!-- Header -->
+			<header>
+
+				<!-- Author -->
+				<div class="entry-author">
+					Posted on {{ entry.date }}, by <strong>{{ entry.author.nickname }}</strong>
+				</div>
+
+				<!-- Edit-Delete controls -->
+				<div class="float-right">
+					{% if entry.author == current_user %}
+					<i class="icon-pencil toggleEditing" data="edit" id="{{ entry.key.id }}"></i>
+					<i class="icon-trash toggleDeleting" id="{{ entry.key.id }}"></i>
+					{% endif %}
+				</div>
+				
+				<!-- Title -->	
+				<h1 class="entry-title">
+					{{ entry.title|striptags }}
+				</h1>
+			</header>
+
+			<!-- Body -->
+			<div class="entry-content">
+				
+				{{ entry.content|striptags|markdown|removetags:"h1 h2 h3 h4 h5 h6" }}
+				
+				<div class="text-align-right italic {{ entry.moderated }}">
+					{{ entry.moderated }}
+				</div>
+			</div>
+		</article>
+
+		{% if entry.author == current_user %}
+			<!-- Edit form -->
+			<form class="edit-entry-form form-{{ entry.key.id }}" action="/edit_entry/" method="post">
+				<h2 class="tip">Edit entry</h2>
+				{% csrf_token %}
+				<input id="id_title" type="text" name="title" placeholder="Title" value="{{ entry.title }}"/>
+				<textarea id="id_content" name="content">{{ entry.content }}</textarea>
+				<input type="hidden" name="id" value="{{ entry.key.id }}"/>
+				<input type="hidden" name="type" value="edit"/>
+				<input class="btn" type="submit" value="Save">
+				<a class="underline-link toggleEditing margin-left10" data="cancel" id="{{ entry.key.id }}">
+					Cancel
+				</a>
+			</form>
+			
+			<!-- Delete form -->
+			<form id="delete_form_{{ entry.key.id }}" action="/delete_entry/" method="post">
+				{% csrf_token %}
+				<input type="hidden" name="id" value="{{ entry.key.id }}"/>
+				<input type="hidden" name="type" value="delete"/>
+			</form>
+		{% endif %}
+
+	{% else %}
+
+		<h2>Nothing to show!</h2>
+
+	{% endif %}
+
+{% endblock %}
