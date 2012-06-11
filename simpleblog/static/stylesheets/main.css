@@ -98,12 +98,11 @@ li {
 [class*=" icon-"] {
 	cursor: pointer;
 	display: inline-block;
-	width: 14px;
-	height: 14px;
-	*margin-right: .3em;
+	width: 30px;
+	height: 30px;
 	line-height: 14px;
 	vertical-align: text-top;
-	background-image: url("glyphicons-halflings.png");
+	background-image: url("edit-delete.png");
 	background-position: 14px 14px;
 	background-repeat: no-repeat;
 }
@@ -112,10 +111,10 @@ li {
 	background-color: #E0FFB8;
 }
 .icon-pencil {
-	background-position: 0 -72px;
+	background-position: 1px 0;
 }
 .icon-trash {
-	background-position: -456px 0;
+	background-position: -30px 0;
 }
 /*
 	End - Controls

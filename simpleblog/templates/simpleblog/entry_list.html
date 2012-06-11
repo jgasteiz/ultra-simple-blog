@@ -18,7 +18,7 @@
 
 				<!-- Edit-Delete controls -->
 				<div class="float-right">
-					{% if entry.author == current_user %}
+					{% if entry.author == current_user or is_admin %}
 					<i class="icon-pencil toggleEditing" data="edit" id="{{ entry.key.id }}"></i>
 					<i class="icon-trash toggleDeleting" id="{{ entry.key.id }}"></i>
 					{% endif %}
@@ -43,7 +43,7 @@
 			</div>
 		</article>
 
-		{% if entry.author == current_user %}
+		{% if entry.author == current_user or is_admin %}
 			<!-- Edit form -->
 			<form class="edit-entry-form form-{{ entry.key.id }}" action="/edit_entry/" method="post">
 				<h2 class="tip">Edit entry</h2>
@@ -101,9 +101,6 @@
 			</li>
 			<li>
 				<a target="_blank" href="http://markitup.jaysalvat.com/home/">Markitup</a> is the jQuery markup editor used for writing entries.
-			</li>
-			<li>
-				<a href="http://glyphicons.com/" target="_blank">Glyphicons</a> were used for "edit" and "trash" icons.
 			</li>
 			<li>
 				Inspiration taken from <a target="_blank" href="http://octopress.org/">Octopress</a>.

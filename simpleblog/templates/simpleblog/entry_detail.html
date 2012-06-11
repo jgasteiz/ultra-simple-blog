@@ -18,13 +18,13 @@
 				</div>
 
 				<!-- Edit-Delete controls -->
-				<div class="float-right">
-					{% if entry.author == current_user %}
-					<i class="icon-pencil toggleEditing" data="edit" id="{{ entry.key.id }}"></i>
-					<i class="icon-trash toggleDeleting" id="{{ entry.key.id }}"></i>
-					{% endif %}
-				</div>
-				
+				{% if entry.author == current_user or is_admin %}
+					<div class="float-right">
+						<i class="icon-pencil toggleEditing" data="edit" id="{{ entry.key.id }}"></i>
+						<i class="icon-trash toggleDeleting" id="{{ entry.key.id }}"></i>
+					</div>
+				{% endif %}
+
 				<!-- Title -->	
 				<h1 class="entry-title">
 					{{ entry.title|striptags }}
@@ -42,7 +42,7 @@
 			</div>
 		</article>
 
-		{% if entry.author == current_user %}
+		{% if entry.author == current_user or is_admin %}
 			<!-- Edit form -->
 			<form class="edit-entry-form form-{{ entry.key.id }}" action="/edit_entry/" method="post">
 				<h2 class="tip">Edit entry</h2>
