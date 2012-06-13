@@ -34,7 +34,7 @@
 			<!-- Body -->
 			<div class="entry-content">
 				
-				{{ entry.content|striptags|markdown|removetags:"h1 h2 h3 h4 h5 h6" }}
+				{{ entry.content|striptags|markdown:"safe"|removetags:"h1 h2 h3 h4 h5 h6" }}
 				
 				<div class="text-align-right italic {{ entry.moderated }}">
 					{{ entry.moderated }}
