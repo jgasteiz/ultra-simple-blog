@@ -15,7 +15,3 @@
 ### Javascript text-editor
 
 * [Markitup(markdown-mode)](http://markitup.jaysalvat.com/home/ "Markitup(markdown-mode")
-
-### Icons used
-
-* [Glyphicons](http://glyphicons.com/ "Glyphicons")
